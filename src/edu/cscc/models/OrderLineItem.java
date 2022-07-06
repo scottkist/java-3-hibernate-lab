@@ -1,13 +1,20 @@
 package edu.cscc.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "order_line_items")
 public class OrderLineItem {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
     private Rental rental;
 
+    @ManyToOne
     private Order order;
 
     public OrderLineItem() {

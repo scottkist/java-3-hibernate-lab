@@ -1,8 +1,14 @@
 package edu.cscc;
 
+import edu.cscc.models.Customer;
+import edu.cscc.models.Order;
+import edu.cscc.models.OrderLineItem;
 import edu.cscc.mvc.framework.MVCContext;
 import edu.cscc.mvc.framework.Request;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.lang.reflect.InvocationTargetException;
 
 public class Main {

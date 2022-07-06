@@ -1,19 +1,27 @@
 package edu.cscc.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name  = "orders")
 public class Order {
 
     public static final String DEFAULT_STORE_NUMBER = "39458";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
     private Employee employee;
 
+    @ManyToOne
     private Customer customer;
 
+    @Column (name = "store_number")
     private String storeNumber;
 
     private List<OrderLineItem> orderLineItems;
