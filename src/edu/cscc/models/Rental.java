@@ -13,8 +13,11 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+//    @ManyToOne
+    @OneToMany(mappedBy = "rental")
     private List<OrderLineItem> orderLineItems;
 
     public Rental() {

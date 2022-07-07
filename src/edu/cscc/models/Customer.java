@@ -13,8 +13,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //Other Properties
-
+    @Column(name = "smart_id", unique = true)
     private String smartId;
 
     @Column(name = "first_name")
@@ -23,11 +22,9 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany
-    @JoinTable(name = "orders",
-        joinColumns = @JoinColumn(name = "customer_id"),
-        inverseJoinColumns = @JoinColumn(name = "employee_id"))
-
+//    @ManyToOne
+//    @JoinColumn (name = "customer_id")
+    @OneToMany(mappedBy = "customer")
     private List<Order> orders;
 
     public Customer() {

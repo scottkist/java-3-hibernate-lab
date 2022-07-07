@@ -5,6 +5,7 @@ import edu.cscc.models.Order;
 import edu.cscc.mvc.framework.ApplicationController;
 import edu.cscc.mvc.framework.MVCContext;
 import edu.cscc.services.LacklusterVideoRepository;
+import edu.cscc.services.LacklusterVideoRepositoryImpl;
 import edu.cscc.views.ErrorView;
 import edu.cscc.views.orders.OrderCreateView;
 import edu.cscc.views.orders.OrdersIndexView;
@@ -19,6 +20,9 @@ public class OrdersController extends ApplicationController {
         super(context);
         // TODO Create and assign an instance of the LacklusterVideoRepository
         //  to the lacklusterVideoRepository variable.
+        lacklusterVideoRepository = new LacklusterVideoRepositoryImpl();
+
+
     }
 
     public void index() {

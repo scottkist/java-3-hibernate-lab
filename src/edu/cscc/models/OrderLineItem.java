@@ -11,9 +11,11 @@ public class OrderLineItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+//    @OneToMany(mappedBy = "orderLineItem")
     @ManyToOne
     private Rental rental;
 
+//    @OneToMany(mappedBy = "orderLineItem")
     @ManyToOne
     private Order order;
 

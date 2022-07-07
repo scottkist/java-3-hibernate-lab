@@ -24,6 +24,7 @@ public class Order {
     @Column (name = "store_number")
     private String storeNumber;
 
+    @OneToMany(mappedBy = "order")
     private List<OrderLineItem> orderLineItems;
 
     public Order() {

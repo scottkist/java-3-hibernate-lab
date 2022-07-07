@@ -22,6 +22,7 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy = "employee")
     private List<Order> orders;
 
     public Employee() {
