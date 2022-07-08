@@ -16,7 +16,6 @@ public class Rental {
     @Column(name = "name")
     private String name;
 
-//    @ManyToOne
     @OneToMany(mappedBy = "rental")
     private List<OrderLineItem> orderLineItems;
 
