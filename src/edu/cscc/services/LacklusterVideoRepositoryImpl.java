@@ -33,26 +33,21 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
             sqlQuery.setParameter("customerId", customerId);
             sqlQuery.setParameter("storeNumber", Order.DEFAULT_STORE_NUMBER );
             sqlQuery.executeUpdate();
-//            entityManager.getTransaction().commit();
-            //find the last entry/index
-            orders =  this.getOrders();
-            Integer index = orders.get(orders.size()-1).getId();
+
+            //find OrderId
+            Query queryForOrderId = entityManager.createNativeQuery("SELECT id orders ORDER BY id DESC LIMIT 1");
+            Integer orderId = queryForOrderId.getFirstResult();
 
             System.out.println("Test");
 
                 for (int i = 0; i < rentalIds.size(); i++) {
-//                    entityManager.getTransaction().begin();
                     Query sqlCreateOLI = entityManager.createNativeQuery("insert into order_line_items (order_id, rental_id) values (:orderId, :rentalId)");
-//                    PreparedStatement addToOrderLineItemsTable = connection.prepareStatement(sqlCreateOLI);
 
-                    sqlCreateOLI.setParameter("orderId", index);
+
+                    sqlCreateOLI.setParameter("orderId", orderId);
                     sqlCreateOLI.setParameter("rentalId", rentalIds.get(i));
-//                    addToOrderLineItemsTable.setInt(1, orderId);
-//                    addToOrderLineItemsTable.setInt(2, rentalIds.get(i));
-//                    addToOrderLineItemsTable.executeUpdate();
                     sqlCreateOLI.executeUpdate();
                     entityManager.getTransaction().commit();
-//                }
             }
 
             } catch (Exception exception) {
