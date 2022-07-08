@@ -25,7 +25,16 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
 
     @Override
     public void createOrder(Integer employeeId, Integer customerId, List<Integer> rentalIds) throws LacklusterVideoServiceException {
-//        Employee =
+        try {
+            entityManager.getTransaction().begin();
+            Query sqlQuery = entityManager.createQuery("test");
+
+
+            } catch (Exception exception) {
+            entityManager.getTransaction().rollback();
+            exception.printStackTrace();
+            throw new LacklusterVideoServiceException("Could not create order");
+        }
     }
 
     @Override
