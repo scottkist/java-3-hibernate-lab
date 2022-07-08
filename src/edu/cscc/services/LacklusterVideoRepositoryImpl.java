@@ -25,26 +25,30 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
 
     @Override
     public void createOrder(Integer employeeId, Integer customerId, List<Integer> rentalIds) throws LacklusterVideoServiceException {
+        /////////////////////////////////////////////////////////////// This is working
         try {
-            List<Order> orders = new ArrayList<>();
+            List<Order> orderIds = new ArrayList<>();
             entityManager.getTransaction().begin();
             Query sqlQuery = entityManager.createNativeQuery("insert into orders (employee_id, customer_id, store_number) values (:employeeId, :customerId, :storeNumber)");
             sqlQuery.setParameter("employeeId", employeeId);
             sqlQuery.setParameter("customerId", customerId);
             sqlQuery.setParameter("storeNumber", Order.DEFAULT_STORE_NUMBER );
             sqlQuery.executeUpdate();
+            entityManager.getTransaction().commit();
+            /////////////////////////////////////////////////////////////
+            //TODO: Get Order ID - Previous lab did Order by Dec and Limited by 1. SO trying the same solution..
+            Query queryForOrderId = entityManager.createNativeQuery("SELECT id From orders ORDER BY id DESC LIMIT 1");
+            orderIds = queryForOrderId.getResultList();
+            Integer test = ((Integer)orderIds.get(0)
+            );
+            System.out.println("testing");
 
-            //find OrderId
-            Query queryForOrderId = entityManager.createNativeQuery("SELECT id orders ORDER BY id DESC LIMIT 1");
-            Integer orderId = queryForOrderId.getFirstResult();
-
-            System.out.println("Test");
 
                 for (int i = 0; i < rentalIds.size(); i++) {
                     Query sqlCreateOLI = entityManager.createNativeQuery("insert into order_line_items (order_id, rental_id) values (:orderId, :rentalId)");
 
 
-                    sqlCreateOLI.setParameter("orderId", orderId);
+//                    sqlCreateOLI.setParameter("orderId", orderIds.get(1));
                     sqlCreateOLI.setParameter("rentalId", rentalIds.get(i));
                     sqlCreateOLI.executeUpdate();
                     entityManager.getTransaction().commit();

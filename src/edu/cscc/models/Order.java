@@ -7,7 +7,13 @@ import java.util.Objects;
 
 @Entity
 @Table(name  = "orders")
+@NamedQuery(
+        name = Order.FIND_LAST_ID,
+        query = "select o.id from Order o ORDER BY id DESC"
+)
 public class Order {
+
+    public static final String FIND_LAST_ID= "Order.findLastId";
 
     public static final String DEFAULT_STORE_NUMBER = "39458";
 
