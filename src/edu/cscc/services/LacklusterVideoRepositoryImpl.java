@@ -10,8 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository {
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("LacklusterVideo");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
+
+
+    public LacklusterVideoRepositoryImpl() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("LacklusterVideo");
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
 
     @Override
     public List<Order> getOrders() throws LacklusterVideoServiceException {
