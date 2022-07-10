@@ -1,21 +1,36 @@
 package edu.cscc.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name  = "orders")
+@NamedQuery(
+        name = Order.FIND_LAST_ID,
+        query = "select o.id from Order o ORDER BY id DESC"
+)
 public class Order {
+
+    public static final String FIND_LAST_ID= "Order.findLastId";
 
     public static final String DEFAULT_STORE_NUMBER = "39458";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
     private Employee employee;
 
+    @ManyToOne
     private Customer customer;
 
+    @Column (name = "store_number")
     private String storeNumber;
 
+    @OneToMany(mappedBy = "order")
     private List<OrderLineItem> orderLineItems;
 
     public Order() {

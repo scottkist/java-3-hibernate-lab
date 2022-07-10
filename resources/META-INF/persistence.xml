@@ -2,8 +2,11 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
     <persistence-unit name="LacklusterVideo">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <!-- Add classes here -->
-        <!-- <class>org.hibernate.envers.demo.Address</class>-->
+        <class>edu.cscc.models.Customer</class>
+        <class>edu.cscc.models.Employee</class>
+        <class>edu.cscc.models.Order</class>
+        <class>edu.cscc.models.OrderLineItem</class>
+        <class>edu.cscc.models.Rental</class>
         <exclude-unlisted-classes />
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

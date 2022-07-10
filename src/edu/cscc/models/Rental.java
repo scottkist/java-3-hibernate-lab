@@ -1,15 +1,22 @@
 package edu.cscc.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "rentals")
 public class Rental {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "rental")
     private List<OrderLineItem> orderLineItems;
 
     public Rental() {

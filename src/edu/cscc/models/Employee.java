@@ -1,19 +1,30 @@
 package edu.cscc.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "employees")
+
 public class Employee {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "active_store_number")
     private String activeStoreNumber;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy = "employee")
     private List<Order> orders;
 
     public Employee() {
