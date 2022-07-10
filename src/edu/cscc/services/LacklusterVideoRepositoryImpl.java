@@ -4,11 +4,8 @@ import edu.cscc.exceptions.LacklusterVideoServiceException;
 import edu.cscc.models.Customer;
 import edu.cscc.models.Employee;
 import edu.cscc.models.Order;
-import edu.cscc.models.OrderLineItem;
 
 import javax.persistence.*;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository {
@@ -22,7 +19,7 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
     }
 
     @Override
-    public List<Order> getOrders() throws LacklusterVideoServiceException {
+    public List<Order> getOrders() {
         List<Order> orders;
         String selectQuery = "Select o from Order o";
         Query query = entityManager.createQuery(selectQuery);
@@ -33,7 +30,6 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
 
     @Override
     public void createOrder(Integer employeeId, Integer customerId, List<Integer> rentalIds) throws LacklusterVideoServiceException {
-        /////////////////////////////////////////////////////////////// This is working
         try {
             entityManager.getTransaction().begin();
             Employee employee = entityManager.find(Employee.class, employeeId);
