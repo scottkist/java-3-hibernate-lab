@@ -23,7 +23,7 @@ public class LacklusterVideoRepositoryImpl implements LacklusterVideoRepository 
 
     @Override
     public List<Order> getOrders() throws LacklusterVideoServiceException {
-        List<Order> orders = new ArrayList<>();
+        List<Order> orders;
         String selectQuery = "Select o from Order o";
         Query query = entityManager.createQuery(selectQuery);
         orders = query.getResultList();
